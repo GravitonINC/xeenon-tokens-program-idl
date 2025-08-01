@@ -1,0 +1,15 @@
+{
+  "name": "@graviton-inc/xeenon-tokens-program-idl",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "5.5.4"
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+}
