@@ -1,0 +1,2430 @@
+type GetTokensIdlArgs = {
+  xeenonProgramId: string;
+  mayflowerProgramId: string;
+};
+export const getTokensIdl = ({
+  xeenonProgramId,
+  mayflowerProgramId,
+}: GetTokensIdlArgs) => ({
+  address: xeenonProgramId,
+  metadata: {
+    name: 'tokens',
+    version: '0.1.0',
+    spec: '0.1.0',
+    description: 'Xeenon Tokens Program',
+  },
+  instructions: [
+    {
+      name: 'accrue_position_rewards',
+      discriminator: [219, 70, 53, 102, 88, 139, 148, 166],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'market_period',
+        },
+      ],
+      args: [
+        {
+          name: 'period',
+          type: 'u16',
+        },
+      ],
+    },
+    {
+      name: 'borrow',
+      discriminator: [228, 253, 131, 202, 207, 116, 89, 18],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'mayflower_personal_position',
+          docs: ['Mayflower personal position owned by Xeenon market'],
+          writable: true,
+        },
+        {
+          name: 'payer_token_account',
+          docs: ['The token account to deposit the base token to'],
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          docs: ['Liquidity vault for the market'],
+          writable: true,
+        },
+        {
+          name: 'mayflower_tenant',
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'rev_escrow_group',
+          docs: ['Account to hold the revenue for the market group'],
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          docs: ['Account to hold the revenue for the tenant'],
+          writable: true,
+        },
+        {
+          name: 'mint_main',
+          docs: ['Token used as a reserve for the market'],
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [
+        {
+          name: 'amount',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'buy_with_exact_cash_in',
+      discriminator: [53, 248, 95, 20, 54, 162, 146, 247],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+        },
+        {
+          name: 'mayflower_tenant',
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          writable: true,
+        },
+        {
+          name: 'mint_main',
+        },
+        {
+          name: 'token_dst',
+          writable: true,
+        },
+        {
+          name: 'main_ata',
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_group',
+          docs: ['Account to hold the revenue for the market group'],
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          docs: ['Account to hold the revenue for the tenant'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'cash_in',
+          type: 'u64',
+        },
+        {
+          name: 'min_token_out',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'change_market_creator_rewards_share',
+      discriminator: [41, 250, 239, 184, 106, 50, 225, 123],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'xeenon_market',
+          docs: ['Market to change rewards share'],
+          writable: true,
+        },
+        {
+          name: 'xeenon_market_group',
+        },
+      ],
+      args: [
+        {
+          name: '_new_rewards_share',
+          type: 'u8',
+        },
+      ],
+    },
+    {
+      name: 'change_market_group_fees',
+      discriminator: [171, 243, 93, 239, 75, 215, 104, 167],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'governance',
+          signer: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          docs: ['Market to change fees'],
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [
+                  109, 97, 114, 107, 101, 116, 95, 103, 114, 111, 117, 112,
+                ],
+              },
+              {
+                kind: 'account',
+                path: 'mayflower_market_group',
+              },
+            ],
+          },
+        },
+        {
+          name: 'mayflower_market_group',
+          writable: true,
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: '_new_fees',
+          type: {
+            defined: {
+              name: 'Fees',
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: 'change_market_group_options_rate',
+      discriminator: [23, 174, 111, 180, 119, 209, 97, 29],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'governance',
+          signer: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+      ],
+      args: [
+        {
+          name: 'yearly_options_accrual_bps',
+          type: 'u16',
+        },
+      ],
+    },
+    {
+      name: 'claim_creator_rewards',
+      discriminator: [14, 215, 177, 181, 221, 193, 125, 85],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+        },
+        {
+          name: 'payer_token_account',
+          writable: true,
+        },
+        {
+          name: 'market_token_account',
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+      ],
+      args: [],
+    },
+    {
+      name: 'claim_staker_rewards',
+      discriminator: [249, 241, 43, 59, 184, 196, 118, 246],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+        },
+        {
+          name: 'payer_token_account',
+          writable: true,
+        },
+        {
+          name: 'market_token_account',
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+      ],
+      args: [],
+    },
+    {
+      name: 'close_market_period',
+      discriminator: [96, 10, 111, 113, 50, 22, 31, 188],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'closing_period',
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [
+                  109, 97, 114, 107, 101, 116, 95, 112, 101, 114, 105, 111, 100,
+                ],
+              },
+              {
+                kind: 'account',
+                path: 'xeenon_market',
+              },
+              {
+                kind: 'account',
+                path: 'xeenon_market.current_period',
+                account: 'XeenonMarket',
+              },
+            ],
+          },
+        },
+        {
+          name: 'mayflower_market_meta',
+          writable: true,
+        },
+        {
+          name: 'mint_options',
+          docs: ['Mint used to create options'],
+          writable: true,
+        },
+        {
+          name: 'market_options_ata',
+          writable: true,
+        },
+        {
+          name: 'market_token_ata',
+          writable: true,
+        },
+        {
+          name: 'market_main_ata',
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          writable: true,
+        },
+        {
+          name: 'mayflower_tenant',
+        },
+        {
+          name: 'mint_main',
+          docs: ['Token used as a reserve for the market'],
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_group',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [
+        {
+          name: 'args',
+          type: {
+            defined: {
+              name: 'CloseMarketPeriodArgs',
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: 'collect_rev',
+      discriminator: [237, 19, 188, 25, 211, 167, 175, 194],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+        {
+          name: 'xeenon_market',
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'market_main_ata',
+          writable: true,
+        },
+        {
+          name: 'mint_main',
+        },
+        {
+          name: 'rev_escrow_group',
+          writable: true,
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [],
+    },
+    {
+      name: 'deposit_token',
+      discriminator: [11, 156, 96, 218, 39, 163, 180, 19],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'xeenon_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'mayflower_personal_position',
+          docs: ['Mayflower personal position owned by Xeenon position'],
+          writable: true,
+        },
+        {
+          name: 'payer_token_account',
+          docs: ['The ATA to take the base token from'],
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          docs: ['The base token mint'],
+        },
+        {
+          name: 'escrow',
+          docs: ['Shared escrow account for the market'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'amount',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'init_market_linear_config',
+      discriminator: [48, 183, 174, 110, 52, 96, 216, 176],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'market_linear_config',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [
+        {
+          name: 'price_curve',
+          type: {
+            defined: {
+              name: 'LinearPriceCurveSerialized',
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: 'init_xeenon_market',
+      discriminator: [71, 139, 32, 41, 107, 170, 199, 132],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'seed',
+          docs: ['Seed of the market'],
+          signer: true,
+        },
+        {
+          name: 'mint_token',
+          docs: ['Mint token associated with the market'],
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'market_linear_config',
+        },
+        {
+          name: 'metadata',
+          writable: true,
+        },
+        {
+          name: 'mayflower_tenant',
+          docs: ['Mayflower tenant for Xeenon'],
+        },
+        {
+          name: 'mayflower_market',
+          docs: ['PDA for the Mayflower Market to create'],
+          writable: true,
+        },
+        {
+          name: 'mayflower_market_meta',
+          docs: ['PDA for the Mayflower Market Meta to create'],
+          writable: true,
+        },
+        {
+          name: 'xeenon_market',
+          docs: ['Market to create'],
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [109, 97, 114, 107, 101, 116],
+              },
+              {
+                kind: 'account',
+                path: 'mayflower_market_meta',
+              },
+            ],
+          },
+        },
+        {
+          name: 'mint_main',
+          docs: ['Token used as a reserve for the market'],
+        },
+        {
+          name: 'mint_options',
+          docs: ['Mint used to create options'],
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          docs: ['Liquidity vault for the market'],
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_group',
+          docs: ['Account to hold the revenue for the market group'],
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          docs: ['Account to hold the revenue for the tenant'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'rent',
+          address: 'SysvarRent111111111111111111111111111111111',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'token_metadata_program',
+          address: 'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s',
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [
+        {
+          name: 'params',
+          type: {
+            defined: {
+              name: 'InitXeenonMarketParams',
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: 'init_xeenon_market_group',
+      discriminator: [80, 127, 113, 83, 3, 2, 24, 176],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'seed',
+          docs: ['Seed of the market group'],
+          signer: true,
+        },
+        {
+          name: 'tenant_admin',
+          docs: ['Seed of the market group'],
+          signer: true,
+        },
+        {
+          name: 'mayflower_tenant',
+          docs: ['Mayflower tenant for Samsara'],
+        },
+        {
+          name: 'mayflower_market_group',
+          docs: ['PDA for the Mayflower Market Group to create'],
+          writable: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          docs: ['Market to create'],
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [
+                  109, 97, 114, 107, 101, 116, 95, 103, 114, 111, 117, 112,
+                ],
+              },
+              {
+                kind: 'account',
+                path: 'mayflower_market_group',
+              },
+            ],
+          },
+        },
+        {
+          name: 'governance',
+          docs: ['Governance of the market group'],
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [],
+    },
+    {
+      name: 'init_xeenon_position',
+      discriminator: [167, 127, 5, 57, 220, 227, 226, 28],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+        },
+        {
+          name: 'xeenon_position',
+          docs: ['Position to create'],
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [112, 111, 115, 105, 116, 105, 111, 110],
+              },
+              {
+                kind: 'account',
+                path: 'xeenon_market',
+              },
+              {
+                kind: 'account',
+                path: 'payer',
+              },
+            ],
+          },
+        },
+        {
+          name: 'mayflower_personal_position',
+          docs: ['Mayflower personal position account for the market'],
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+        },
+        {
+          name: 'mayflower_market_meta',
+          docs: ['PDA for the Mayflower Market Meta to create'],
+        },
+        {
+          name: 'escrow',
+          docs: ['Shared escrow account for the market'],
+          writable: true,
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [],
+    },
+    {
+      name: 'repay',
+      discriminator: [234, 103, 67, 82, 208, 234, 219, 166],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'mayflower_personal_position',
+          docs: ['Mayflower personal position owned by Xeenon position'],
+          writable: true,
+        },
+        {
+          name: 'payer_token_account',
+          docs: ['The ATA to take the base token from for repayment'],
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          docs: ['Liquidity vault for the market'],
+          writable: true,
+        },
+        {
+          name: 'mint_main',
+          docs: ['Token used as a reserve for the market'],
+          writable: true,
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'amount',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'sell_with_exact_token_in',
+      discriminator: [27, 141, 98, 109, 197, 168, 104, 84],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+        },
+        {
+          name: 'mayflower_tenant',
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          writable: true,
+        },
+        {
+          name: 'mint_main',
+        },
+        {
+          name: 'token_src',
+          writable: true,
+        },
+        {
+          name: 'main_dst',
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_group',
+          docs: ['Account to hold the revenue for the market group'],
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          docs: ['Account to hold the revenue for the tenant'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'amount_in',
+          type: 'u64',
+        },
+        {
+          name: 'cash_out_min',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'withdraw_token',
+      discriminator: [136, 235, 181, 5, 101, 109, 57, 81],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+          relations: ['xeenon_position'],
+        },
+        {
+          name: 'xeenon_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_position',
+          writable: true,
+        },
+        {
+          name: 'mayflower_personal_position',
+          docs: ['Mayflower personal position owned by Xeenon position'],
+          writable: true,
+        },
+        {
+          name: 'payer_token_account',
+          docs: ['The ATA to take the base token from'],
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          docs: ['The base token mint'],
+          writable: true,
+        },
+        {
+          name: 'escrow',
+          docs: ['Shared escrow account for the market'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+        {
+          name: 'system_program',
+          address: '11111111111111111111111111111111',
+        },
+      ],
+      args: [
+        {
+          name: 'amount',
+          type: 'u64',
+        },
+      ],
+    },
+    {
+      name: 'xeenon_raise_floor_preserve_area_checked',
+      discriminator: [75, 147, 225, 192, 118, 81, 54, 132],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'super_admin',
+          docs: ['Super admin of the program'],
+          signer: true,
+          address: xeenonProgramId,
+        },
+        {
+          name: 'xeenon_market_group',
+          docs: ['Market to change fees'],
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: 'const',
+                value: [
+                  109, 97, 114, 107, 101, 116, 95, 103, 114, 111, 117, 112,
+                ],
+              },
+              {
+                kind: 'account',
+                path: 'mayflower_market_group',
+              },
+            ],
+          },
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'args',
+          type: {
+            defined: {
+              name: 'RaiseFloorPreserveAreaCheckedArgs',
+            },
+          },
+        },
+      ],
+    },
+  ],
+  accounts: [
+    {
+      name: 'MarketGroup',
+      discriminator: [131, 205, 141, 87, 148, 210, 33, 36],
+    },
+    {
+      name: 'MarketLinear',
+      discriminator: [133, 114, 237, 100, 77, 96, 120, 49],
+    },
+    {
+      name: 'MarketLinearConfig',
+      discriminator: [199, 220, 138, 165, 40, 47, 195, 203],
+    },
+    {
+      name: 'MarketMeta',
+      discriminator: [95, 146, 205, 231, 152, 205, 151, 183],
+    },
+    {
+      name: 'PersonalPosition',
+      discriminator: [40, 172, 123, 89, 170, 15, 56, 141],
+    },
+    {
+      name: 'XeenonMarket',
+      discriminator: [249, 44, 25, 160, 75, 241, 152, 50],
+    },
+    {
+      name: 'XeenonMarketGroup',
+      discriminator: [205, 199, 160, 156, 193, 123, 254, 131],
+    },
+    {
+      name: 'XeenonMarketPeriod',
+      discriminator: [40, 249, 228, 63, 94, 218, 69, 152],
+    },
+    {
+      name: 'XeenonPosition',
+      discriminator: [60, 223, 128, 224, 146, 133, 212, 93],
+    },
+  ],
+  events: [
+    {
+      name: 'BorrowEvent',
+      discriminator: [86, 8, 140, 206, 215, 179, 118, 201],
+    },
+    {
+      name: 'BuyWithExactCashInEvent',
+      discriminator: [104, 131, 151, 167, 143, 206, 98, 19],
+    },
+    {
+      name: 'ChangeMarketCreatorRewardsShareEvent',
+      discriminator: [53, 223, 219, 12, 149, 152, 13, 213],
+    },
+    {
+      name: 'ClaimCreatorRewardsEvent',
+      discriminator: [88, 202, 199, 7, 7, 14, 179, 164],
+    },
+    {
+      name: 'ClaimStakerRewardsEvent',
+      discriminator: [41, 7, 166, 191, 139, 194, 81, 77],
+    },
+    {
+      name: 'DepositEvent',
+      discriminator: [120, 248, 61, 83, 31, 142, 107, 144],
+    },
+    {
+      name: 'FloorRaisedEvent',
+      discriminator: [180, 150, 147, 252, 238, 147, 174, 236],
+    },
+    {
+      name: 'MarketCreatedEvent',
+      discriminator: [130, 142, 5, 16, 107, 160, 73, 124],
+    },
+    {
+      name: 'MarketPeriodClosedEvent',
+      discriminator: [173, 112, 176, 168, 116, 243, 167, 14],
+    },
+    {
+      name: 'RepayEvent',
+      discriminator: [129, 213, 0, 108, 218, 108, 82, 140],
+    },
+    {
+      name: 'SellWithExactTokenInEvent',
+      discriminator: [133, 62, 107, 103, 218, 26, 67, 248],
+    },
+    {
+      name: 'WithdrawEvent',
+      discriminator: [22, 9, 133, 26, 160, 44, 71, 192],
+    },
+  ],
+  errors: [
+    {
+      code: 6000,
+      name: 'InsufficientStakedBalance',
+      msg: 'Insufficient Staked Balance',
+    },
+    {
+      code: 6001,
+      name: 'InsufficientGlobalStakedBalance',
+      msg: 'Insufficient Global Staked Balance',
+    },
+    {
+      code: 6002,
+      name: 'InvalidMintPercentageOptions',
+      msg: 'Invalid Mint Percentage Options',
+    },
+    {
+      code: 6003,
+      name: 'InvalidCreatorRewardsSharePercentage',
+      msg: 'Invalid Creator Rewards Share Percentage',
+    },
+    {
+      code: 6004,
+      name: 'InvalidClosingPeriod',
+      msg: 'Invalid Closing Period',
+    },
+    {
+      code: 6005,
+      name: 'BorrowPowerExceeded',
+      msg: 'Borrow Power Exceeded',
+    },
+    {
+      code: 6006,
+      name: 'InsufficientDebt',
+      msg: 'Insufficient Debt to Repay',
+    },
+    {
+      code: 6007,
+      name: 'CannotWithdrawCollateralWithDebt',
+      msg: 'Cannot withdraw collateral with outstanding debt',
+    },
+    {
+      code: 6008,
+      name: 'InvalidPeriodProvided',
+      msg: 'Invalid Period Provided',
+    },
+    {
+      code: 6009,
+      name: 'InvalidNextPeriodProvided',
+      msg: 'Invalid Next Period Provided',
+    },
+    {
+      code: 6010,
+      name: 'PeriodNotClosed',
+      msg: 'Period is not closed',
+    },
+    {
+      code: 6011,
+      name: 'PeriodMismatch',
+      msg: 'Position period does not match market period',
+    },
+    {
+      code: 6012,
+      name: 'NoRewardsToClaim',
+      msg: 'No rewards to claim',
+    },
+    {
+      code: 6013,
+      name: 'ArithmeticOverflow',
+      msg: 'Arithmetic overflow',
+    },
+  ],
+  types: [
+    {
+      name: 'BorrowEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'market_debt',
+            type: 'u64',
+          },
+          {
+            name: 'user_debt',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'BuyWithExactCashInEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'trader',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'net_cash_in',
+            type: 'u64',
+          },
+          {
+            name: 'fees',
+            type: 'u64',
+          },
+          {
+            name: 'token_out',
+            type: 'u64',
+          },
+          {
+            name: 'token_supply',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'ChangeMarketCreatorRewardsShareEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'creator_rewards_share_percentage',
+            type: 'u8',
+          },
+          {
+            name: 'xeenon_market',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'ClaimCreatorRewardsEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'accumulated_claims',
+            type: 'u64',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'ClaimStakerRewardsEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'accumulated_claims',
+            type: 'u64',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'CloseMarketPeriodArgs',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_percentage_options',
+            docs: [
+              'The percentage of the accrued options that will be created',
+            ],
+            type: 'u8',
+          },
+          {
+            name: 'closing_period',
+            docs: ['The period to close, must be equal to the current period'],
+            type: 'u16',
+          },
+        ],
+      },
+    },
+    {
+      name: 'DecimalSerialized',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'val',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'DepositEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+          {
+            name: 'user_staked',
+            type: 'u64',
+          },
+          {
+            name: 'market_staked',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'DutchConfigSerialized',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'init_boost',
+            docs: ['Initial boost for the dutch auction'],
+            type: 'f64',
+          },
+          {
+            name: 'duration',
+            docs: ['Duration of the dutch auction in seconds'],
+            type: 'u32',
+          },
+          {
+            name: 'curvature',
+            docs: ['Curvature of the dutch auction'],
+            type: 'f64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'Fees',
+      docs: [
+        'All fees denominated in micro-basis points (1/10000th of a percent)',
+      ],
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'buy',
+            type: 'u32',
+          },
+          {
+            name: 'sell',
+            type: 'u32',
+          },
+          {
+            name: 'borrow',
+            type: 'u32',
+          },
+          {
+            name: 'exercise_option',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'FloorRaisedEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'floor',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'new_shoulder_end',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'InitXeenonMarketParams',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'name',
+            type: 'string',
+          },
+          {
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            name: 'uri',
+            type: 'string',
+          },
+          {
+            name: 'creator_rewards_share_percentage',
+            type: 'u8',
+          },
+        ],
+      },
+    },
+    {
+      name: 'LinearPriceCurveSerialized',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'floor',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'm1',
+            docs: ['Shoulder slope'],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'm2',
+            docs: ['main slope'],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'x2',
+            docs: ['Shoulder end'],
+            type: 'u64',
+          },
+          {
+            name: 'b2',
+            docs: ['Main y-intercept'],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketCreatedEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'creator',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketGroup',
+      docs: ['Configuration for a group of markets'],
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'tenant',
+            type: 'pubkey',
+          },
+          {
+            name: 'admin',
+            type: 'pubkey',
+          },
+          {
+            name: 'proposed_admin',
+            type: {
+              option: 'pubkey',
+            },
+          },
+          {
+            name: 'pda_meta',
+            type: {
+              defined: {
+                name: 'PdaMeta',
+              },
+            },
+          },
+          {
+            name: 'fees',
+            type: {
+              defined: {
+                name: 'Fees',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketLinear',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'market_meta',
+            docs: ['The market_meta for the linear'],
+            type: 'pubkey',
+          },
+          {
+            name: 'state',
+            docs: ['The state for the market'],
+            type: {
+              defined: {
+                name: 'MarketState',
+              },
+            },
+          },
+          {
+            name: 'price_curve',
+            docs: ['The price curve for the market'],
+            type: {
+              defined: {
+                name: 'LinearPriceCurveSerialized',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketLinearConfig',
+      docs: [
+        'This account is used to store preset values for the market linear config and save ~71 bytes in the transaction to initialize the market linear',
+      ],
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'price_curve',
+            type: {
+              defined: {
+                name: 'LinearPriceCurveSerialized',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketMeta',
+      docs: ['Generic metadata for all kinds of markets'],
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_main',
+            docs: ['Mint for the main backing token (the cash token)'],
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            docs: ['Mint for the token being traded'],
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_options',
+            docs: ['Mint for the options token'],
+            type: 'pubkey',
+          },
+          {
+            name: 'market_group',
+            docs: ['The market group for the market'],
+            type: 'pubkey',
+          },
+          {
+            name: 'market',
+            docs: [
+              'The market for the meta',
+              'Must link here in order to ensure that there is a 1:1 relationship between market and market meta',
+            ],
+            type: 'pubkey',
+          },
+          {
+            name: 'token_program_main',
+            docs: ['The program ID for the main token'],
+            type: 'pubkey',
+          },
+          {
+            name: 'liq_vault_main',
+            docs: ['Vault that holds the liquidity for the main token'],
+            type: 'pubkey',
+          },
+          {
+            name: 'rev_escrow_group',
+            docs: ['The token account that holds the revenue for the market'],
+            type: 'pubkey',
+          },
+          {
+            name: 'rev_escrow_tenant',
+            docs: ['The token account that holds the revenue for the tenant'],
+            type: 'pubkey',
+          },
+          {
+            name: 'pda_meta',
+            docs: ['The PDA meta for the market'],
+            type: {
+              defined: {
+                name: 'PdaMeta',
+              },
+            },
+          },
+          {
+            name: 'decimals',
+            docs: ['Decimals for the main token'],
+            type: 'u8',
+          },
+          {
+            name: 'permissions',
+            type: {
+              defined: {
+                name: 'MarketPermissions',
+              },
+            },
+          },
+          {
+            name: 'start_time',
+            docs: ['Timestamp of when the market starts'],
+            type: 'u32',
+          },
+          {
+            name: 'dutch_config',
+            docs: ['The Dutch auction config for the market'],
+            type: {
+              defined: {
+                name: 'DutchConfigSerialized',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketPeriodClosedEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'period',
+            type: 'u16',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'stakers_index',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'stakers_accrued_reward_shares',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'stakers_rewards',
+            type: 'u64',
+          },
+          {
+            name: 'creator_rewards',
+            type: 'u64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketPermissions',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'val',
+            type: 'u16',
+          },
+        ],
+      },
+    },
+    {
+      name: 'MarketState',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'token_supply',
+            docs: ['The total supply of the token'],
+            type: 'u64',
+          },
+          {
+            name: 'total_cash_liquidity',
+            docs: ['The total cash liquidity in the market'],
+            type: 'u64',
+          },
+          {
+            name: 'total_debt',
+            docs: ['The total debt in the market'],
+            type: 'u64',
+          },
+          {
+            name: 'total_collateral',
+            docs: ['The total collateral in the market'],
+            type: 'u64',
+          },
+          {
+            name: 'cumulative_revenue_market',
+            docs: ['The cumulative revenue for the market'],
+            type: 'u128',
+          },
+          {
+            name: 'cumulative_revenue_tenant',
+            docs: ['The cumulative revenue for the tenant'],
+            type: 'u128',
+          },
+        ],
+      },
+    },
+    {
+      name: 'PdaMeta',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'bump',
+            type: {
+              array: ['u8', 1],
+            },
+          },
+          {
+            name: 'seed',
+            type: 'pubkey',
+          },
+        ],
+      },
+    },
+    {
+      name: 'PersonalPosition',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'market_meta',
+            type: 'pubkey',
+          },
+          {
+            name: 'owner',
+            type: 'pubkey',
+          },
+          {
+            name: 'escrow',
+            type: 'pubkey',
+          },
+          {
+            name: 'deposited_token_balance',
+            type: 'u64',
+          },
+          {
+            name: 'debt',
+            type: 'u64',
+          },
+          {
+            name: 'bump',
+            type: {
+              array: ['u8', 1],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'RaiseFloorPreserveAreaCheckedArgs',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'floor_increase_ratio',
+            docs: ['The ratio of the floor increase (greater than 0.0)'],
+            type: {
+              defined: {
+                name: 'DecimalSerialized',
+              },
+            },
+          },
+          {
+            name: 'new_shoulder_end',
+            docs: [
+              'The new shoulder end (must be greater than the current shoulder end)',
+            ],
+            type: 'u64',
+          },
+          {
+            name: 'min_liq_ratio',
+            docs: [
+              'The minimum liquidity ratio (greater than or equal to 0.0)',
+              'This is the ratio of the liqudity after the shoulder end to the liquidity of the shoulder',
+            ],
+            type: {
+              defined: {
+                name: 'DecimalSerialized',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'RepayEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'user_debt',
+            type: 'u64',
+          },
+          {
+            name: 'market_debt',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'SellWithExactTokenInEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'trader',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'actual_cash_out',
+            type: 'u64',
+          },
+          {
+            name: 'fees',
+            type: 'u64',
+          },
+          {
+            name: 'token_in',
+            type: 'u64',
+          },
+          {
+            name: 'token_supply',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'WithdrawEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'user_balance',
+            type: 'u64',
+          },
+          {
+            name: 'user_staked',
+            type: 'u64',
+          },
+          {
+            name: 'market_staked',
+            type: 'u64',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+        ],
+      },
+    },
+    {
+      name: 'XeenonMarket',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'xeenon_market_group',
+            type: 'pubkey',
+          },
+          {
+            name: 'mayflower_market_metadata',
+            type: 'pubkey',
+          },
+          {
+            name: 'creator',
+            type: 'pubkey',
+          },
+          {
+            name: 'current_period',
+            type: {
+              array: ['u8', 2],
+            },
+          },
+          {
+            name: 'total_deposited',
+            type: 'u64',
+          },
+          {
+            name: 'total_debt',
+            type: 'u64',
+          },
+          {
+            name: 'exercisable_options',
+            docs: [
+              'Accumulated accrued options, they are updated by every deposit and withdrawal of the market',
+              'At the end of a period, a percentage of the exercisable options is minted depending of the creator position in the leaderboard (4%-100%). The remaining options are rolled over to the next period.',
+            ],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'creator_rewards_share_percentage',
+            docs: [
+              'Percentage of the rewards that will be given to the creator. This value can be updated at the beginning of a month.',
+            ],
+            type: 'u8',
+          },
+          {
+            name: 'creator_earned_rewards',
+            docs: [
+              'Amount of tokens that have been given to the creator as rewards and that can be claimed.',
+            ],
+            type: 'u64',
+          },
+          {
+            name: 'creator_claimed_rewards',
+            type: 'u64',
+          },
+          {
+            name: 'creator_accrued_reward_shares',
+            docs: [
+              'Shares of the period rewards that have been earned by the creator.',
+              'It is updated by every deposit and withdrawal of the market or when the creator_rewards_share_percentage is updated.',
+              'It is reset to 0.0 when a new period starts.',
+            ],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'stakers_index_updated_ts',
+            type: 'u32',
+          },
+          {
+            name: 'stakers_index',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'stakers_accrued_reward_shares',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'bump',
+            type: {
+              array: ['u8', 1],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'XeenonMarketGroup',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'governance',
+            type: 'pubkey',
+          },
+          {
+            name: 'mayflower_market_group',
+            type: 'pubkey',
+          },
+          {
+            name: 'yearly_options_accrual_bps',
+            docs: [
+              'Annualized rate of accrual of options by market as a percentage of the total staked amount',
+            ],
+            type: 'u16',
+          },
+          {
+            name: 'bump',
+            type: {
+              array: ['u8', 1],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'XeenonMarketPeriod',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'xeenon_market',
+            type: 'pubkey',
+          },
+          {
+            name: 'number',
+            type: {
+              array: ['u8', 2],
+            },
+          },
+          {
+            name: 'stakers_index',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'stakers_accrued_reward_shares',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'total_stakers_rewards',
+            docs: [
+              'Total stakers rewards minted for the period. This value is calculated at the end of the period:',
+              'total_stakers_rewards = market.exercisable_options * mint_percentage_options * total_index / stakers_index',
+              'Where total_index is the sum of the stakers_index and the market.creator_accrued_reward_shares',
+              'and mint_percentage_options is a percentage or reward rate provided at the end of the period based on the creator position in the leaderboard',
+            ],
+            type: 'u64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'XeenonPosition',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'xeenon_market',
+            type: 'pubkey',
+          },
+          {
+            name: 'owner',
+            type: 'pubkey',
+          },
+          {
+            name: 'deposited_amount',
+            type: 'u64',
+          },
+          {
+            name: 'debt',
+            type: 'u64',
+          },
+          {
+            name: 'staged_rewards_shares',
+            docs: [
+              'Amount of rewards shares for the last_seen_period that have been accrued but not yet processed',
+            ],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'earned_rewards',
+            type: 'u64',
+          },
+          {
+            name: 'claimed_rewards',
+            type: 'u64',
+          },
+          {
+            name: 'last_seen_period_index',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'last_seen_period',
+            type: {
+              array: ['u8', 2],
+            },
+          },
+          {
+            name: 'bump',
+            type: {
+              array: ['u8', 1],
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
