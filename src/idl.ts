@@ -43,6 +43,36 @@ export const getTokensIdl = ({
       ],
     },
     {
+      name: 'accrue_xeenon_options',
+      discriminator: [179, 157, 83, 104, 167, 230, 255, 144],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeen_options_authority',
+          docs: ['Super admin of the program'],
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_market_group',
+        },
+      ],
+      args: [],
+      returns: {
+        defined: {
+          name: 'AccrueXeenonOptionsEvent',
+        },
+      },
+    },
+    {
       name: 'borrow',
       discriminator: [228, 253, 131, 202, 207, 116, 89, 18],
       accounts: [
@@ -305,6 +335,55 @@ export const getTokensIdl = ({
           type: 'u16',
         },
       ],
+    },
+    {
+      name: 'change_market_group_xeen_accrual_rate',
+      discriminator: [239, 212, 43, 207, 246, 75, 61, 65],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'governance',
+          signer: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+      ],
+      args: [
+        {
+          name: 'yearly_xeen_accrual_bps',
+          type: 'u16',
+        },
+      ],
+    },
+    {
+      name: 'change_market_group_xeen_auth',
+      discriminator: [64, 24, 217, 78, 162, 21, 198, 51],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'governance',
+          signer: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+        {
+          name: 'xeen_options_authority',
+          docs: ['Authority that can claim options earned by Xeen stakers'],
+        },
+      ],
+      args: [],
     },
     {
       name: 'claim_creator_rewards',
@@ -846,6 +925,10 @@ export const getTokensIdl = ({
           docs: ['Governance of the market group'],
         },
         {
+          name: 'xeen_options_authority',
+          docs: ['Authority that can claim options earned by Xeen stakers'],
+        },
+        {
           name: 'mayflower_program',
           address: mayflowerProgramId,
         },
@@ -920,6 +1003,68 @@ export const getTokensIdl = ({
         },
       ],
       args: [],
+    },
+    {
+      name: 'mint_xeenon_options',
+      discriminator: [99, 129, 207, 186, 86, 39, 235, 70],
+      accounts: [
+        {
+          name: 'payer',
+          docs: ['Payer is the receiver of the options'],
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeen_options_authority',
+          docs: ['Super admin of the program'],
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'xeenon_market',
+          writable: true,
+        },
+        {
+          name: 'xeenon_market_group',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+          writable: true,
+        },
+        {
+          name: 'mint_options',
+          docs: ['Mint used to create options'],
+          writable: true,
+        },
+        {
+          name: 'options_dst',
+          docs: ['The token account to deposit the base token to'],
+          writable: true,
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'amount',
+          type: 'u64',
+        },
+      ],
+      returns: {
+        defined: {
+          name: 'MintXeenonOptionsEvent',
+        },
+      },
     },
     {
       name: 'repay',
@@ -1228,6 +1373,10 @@ export const getTokensIdl = ({
   ],
   events: [
     {
+      name: 'AccrueXeenonOptionsEvent',
+      discriminator: [151, 63, 59, 232, 19, 166, 4, 211],
+    },
+    {
       name: 'BorrowEvent',
       discriminator: [86, 8, 140, 206, 215, 179, 118, 201],
     },
@@ -1262,6 +1411,10 @@ export const getTokensIdl = ({
     {
       name: 'MarketPeriodClosedEvent',
       discriminator: [173, 112, 176, 168, 116, 243, 167, 14],
+    },
+    {
+      name: 'MintXeenonOptionsEvent',
+      discriminator: [148, 191, 235, 245, 32, 126, 219, 228],
     },
     {
       name: 'RepayEvent',
@@ -1347,8 +1500,38 @@ export const getTokensIdl = ({
       name: 'ArithmeticOverflow',
       msg: 'Arithmetic overflow',
     },
+    {
+      code: 6014,
+      name: 'InvalidAccountSize',
+      msg: 'Invalid account size',
+    },
+    {
+      code: 6015,
+      name: 'InvalidClaimableOptions',
+      msg: 'Invalid Claimable Options',
+    },
   ],
   types: [
+    {
+      name: 'AccrueXeenonOptionsEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'xeenon_market',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'epoch_options',
+            type: 'u64',
+          },
+        ],
+      },
+    },
     {
       name: 'BorrowEvent',
       type: {
@@ -2008,6 +2191,30 @@ export const getTokensIdl = ({
       },
     },
     {
+      name: 'MintXeenonOptionsEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'amount',
+            type: 'u64',
+          },
+          {
+            name: 'xeenon_market',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+        ],
+      },
+    },
+    {
       name: 'PdaMeta',
       type: {
         kind: 'struct',
@@ -2295,6 +2502,19 @@ export const getTokensIdl = ({
               array: ['u8', 1],
             },
           },
+          {
+            name: 'xeen_accrued_rewards',
+            docs: [
+              'Accumulated accrued rewards for Xeen stakers, they are updated by every deposit and withdrawal of the market',
+            ],
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'xeen_claimable_options',
+            type: 'u64',
+          },
         ],
       },
     },
@@ -2323,6 +2543,18 @@ export const getTokensIdl = ({
             type: {
               array: ['u8', 1],
             },
+          },
+          {
+            name: 'yearly_xeen_accrual_bps',
+            docs: [
+              'Annualized rate of accrual of Xeen by market as a percentage of the total staked amount',
+            ],
+            type: 'u16',
+          },
+          {
+            name: 'xeen_options_authority',
+            docs: ['Authority that can claim options earned by Xeen stakers'],
+            type: 'pubkey',
           },
         ],
       },
