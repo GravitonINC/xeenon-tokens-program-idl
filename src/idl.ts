@@ -1621,6 +1621,12 @@ export const getTokensIdl = ({
             name: 'timestamp',
             type: 'u32',
           },
+          {
+            name: 'xeen_accrued_rewards',
+            type: {
+              array: ['u8', 16],
+            },
+          },
         ],
       },
     },
@@ -1755,6 +1761,12 @@ export const getTokensIdl = ({
             name: 'timestamp',
             type: 'u32',
           },
+          {
+            name: 'xeen_accrued_rewards',
+            type: {
+              array: ['u8', 16],
+            },
+          },
         ],
       },
     },
@@ -1830,6 +1842,12 @@ export const getTokensIdl = ({
           {
             name: 'timestamp',
             type: 'u32',
+          },
+          {
+            name: 'm2',
+            type: {
+              array: ['u8', 16],
+            },
           },
         ],
       },
@@ -2137,6 +2155,18 @@ export const getTokensIdl = ({
             name: 'creator_rewards',
             type: 'u64',
           },
+          {
+            name: 'xeen_accrued_rewards',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+          {
+            name: 'm2',
+            type: {
+              array: ['u8', 16],
+            },
+          },
         ],
       },
     },
@@ -2371,6 +2401,12 @@ export const getTokensIdl = ({
             name: 'user_balance',
             type: 'u64',
           },
+          {
+            name: 'm2',
+            type: {
+              array: ['u8', 16],
+            },
+          },
         ],
       },
     },
@@ -2406,6 +2442,12 @@ export const getTokensIdl = ({
           {
             name: 'timestamp',
             type: 'u32',
+          },
+          {
+            name: 'xeen_accrued_rewards',
+            type: {
+              array: ['u8', 16],
+            },
           },
         ],
       },

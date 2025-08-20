@@ -2230,6 +2230,15 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
+          },
+          {
+            "name": "xeenAccruedRewards",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -2369,6 +2378,15 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
+          },
+          {
+            "name": "xeenAccruedRewards",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -2454,6 +2472,15 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
+          },
+          {
+            "name": "m2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -2820,6 +2847,24 @@ export type Tokens = {
           {
             "name": "creatorRewards",
             "type": "u64"
+          },
+          {
+            "name": "xeenAccruedRewards",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "m2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -3074,6 +3119,15 @@ export type Tokens = {
           {
             "name": "userBalance",
             "type": "u64"
+          },
+          {
+            "name": "m2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -3110,6 +3164,15 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
+          },
+          {
+            "name": "xeenAccruedRewards",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
