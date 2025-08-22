@@ -2546,7 +2546,7 @@ export type Tokens = {
             "type": "u64"
           },
           {
-            "name": "m2",
+            "name": "b2",
             "type": {
               "array": [
                 "u8",
@@ -2626,7 +2626,7 @@ export type Tokens = {
             "type": "u32"
           },
           {
-            "name": "m2",
+            "name": "b2",
             "type": {
               "array": [
                 "u8",
@@ -3010,7 +3010,7 @@ export type Tokens = {
             }
           },
           {
-            "name": "m2",
+            "name": "b2",
             "type": {
               "array": [
                 "u8",
@@ -3273,7 +3273,7 @@ export type Tokens = {
             "type": "u64"
           },
           {
-            "name": "m2",
+            "name": "b2",
             "type": {
               "array": [
                 "u8",

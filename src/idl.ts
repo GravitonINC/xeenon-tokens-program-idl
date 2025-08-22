@@ -1901,7 +1901,7 @@ export const getTokensIdl = ({
             type: 'u64',
           },
           {
-            name: 'm2',
+            name: 'b2',
             type: {
               array: ['u8', 16],
             },
@@ -1973,7 +1973,7 @@ export const getTokensIdl = ({
             type: 'u32',
           },
           {
-            name: 'm2',
+            name: 'b2',
             type: {
               array: ['u8', 16],
             },
@@ -2291,7 +2291,7 @@ export const getTokensIdl = ({
             },
           },
           {
-            name: 'm2',
+            name: 'b2',
             type: {
               array: ['u8', 16],
             },
@@ -2531,7 +2531,7 @@ export const getTokensIdl = ({
             type: 'u64',
           },
           {
-            name: 'm2',
+            name: 'b2',
             type: {
               array: ['u8', 16],
             },
