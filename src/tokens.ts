@@ -900,6 +900,97 @@ export type Tokens = {
       ]
     },
     {
+      "name": "exerciseOptions",
+      "discriminator": [
+        150,
+        29,
+        216,
+        162,
+        89,
+        0,
+        20,
+        229
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mayflowerMarketGroup"
+        },
+        {
+          "name": "mayflowerMarketMeta",
+          "writable": true
+        },
+        {
+          "name": "mintOptions",
+          "writable": true
+        },
+        {
+          "name": "optionsSrc",
+          "writable": true
+        },
+        {
+          "name": "mainSrc",
+          "writable": true
+        },
+        {
+          "name": "tokenDst",
+          "writable": true
+        },
+        {
+          "name": "liqVaultMain",
+          "writable": true
+        },
+        {
+          "name": "mayflowerTenant"
+        },
+        {
+          "name": "mintMain",
+          "writable": true
+        },
+        {
+          "name": "mintToken",
+          "writable": true
+        },
+        {
+          "name": "revEscrowGroup",
+          "writable": true
+        },
+        {
+          "name": "revEscrowTenant",
+          "writable": true
+        },
+        {
+          "name": "mayflowerMarket",
+          "writable": true
+        },
+        {
+          "name": "tokenProgramMain"
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "mayflowerProgram",
+          "address": "MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk"
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "exerciseOptionsWrapperArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "initMarketLinearConfig",
       "discriminator": [
         48,
@@ -1948,6 +2039,19 @@ export type Tokens = {
       ]
     },
     {
+      "name": "exerciseOptionsEvent",
+      "discriminator": [
+        130,
+        23,
+        206,
+        252,
+        23,
+        179,
+        39,
+        111
+      ]
+    },
+    {
       "name": "floorRaisedEvent",
       "discriminator": [
         180,
@@ -2416,6 +2520,54 @@ export type Tokens = {
               "Curvature of the dutch auction"
             ],
             "type": "f64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "exerciseOptionsEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "u32"
+          },
+          {
+            "name": "mintToken",
+            "type": "pubkey"
+          },
+          {
+            "name": "options",
+            "type": "u64"
+          },
+          {
+            "name": "m2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "exerciseOptionsWrapperArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "options",
+            "docs": [
+              "The amount of options to exercise"
+            ],
+            "type": "u64"
           }
         ]
       }

@@ -702,6 +702,88 @@ export const getTokensIdl = ({
       ],
     },
     {
+      name: 'exercise_options',
+      discriminator: [150, 29, 216, 162, 89, 0, 20, 229],
+      accounts: [
+        {
+          name: 'payer',
+          writable: true,
+          signer: true,
+        },
+        {
+          name: 'mayflower_market_group',
+        },
+        {
+          name: 'mayflower_market_meta',
+          writable: true,
+        },
+        {
+          name: 'mint_options',
+          writable: true,
+        },
+        {
+          name: 'options_src',
+          writable: true,
+        },
+        {
+          name: 'main_src',
+          writable: true,
+        },
+        {
+          name: 'token_dst',
+          writable: true,
+        },
+        {
+          name: 'liq_vault_main',
+          writable: true,
+        },
+        {
+          name: 'mayflower_tenant',
+        },
+        {
+          name: 'mint_main',
+          writable: true,
+        },
+        {
+          name: 'mint_token',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_group',
+          writable: true,
+        },
+        {
+          name: 'rev_escrow_tenant',
+          writable: true,
+        },
+        {
+          name: 'mayflower_market',
+          writable: true,
+        },
+        {
+          name: 'token_program_main',
+        },
+        {
+          name: 'token_program',
+          address: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+        },
+        {
+          name: 'mayflower_program',
+          address: mayflowerProgramId,
+        },
+      ],
+      args: [
+        {
+          name: 'args',
+          type: {
+            defined: {
+              name: 'ExerciseOptionsWrapperArgs',
+            },
+          },
+        },
+      ],
+    },
+    {
       name: 'init_market_linear_config',
       discriminator: [48, 183, 174, 110, 52, 96, 216, 176],
       accounts: [
@@ -1401,6 +1483,10 @@ export const getTokensIdl = ({
       discriminator: [120, 248, 61, 83, 31, 142, 107, 144],
     },
     {
+      name: 'ExerciseOptionsEvent',
+      discriminator: [130, 23, 206, 252, 23, 179, 39, 111],
+    },
+    {
       name: 'FloorRaisedEvent',
       discriminator: [180, 150, 147, 252, 238, 147, 174, 236],
     },
@@ -1789,6 +1875,49 @@ export const getTokensIdl = ({
             name: 'curvature',
             docs: ['Curvature of the dutch auction'],
             type: 'f64',
+          },
+        ],
+      },
+    },
+    {
+      name: 'ExerciseOptionsEvent',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'payer',
+            type: 'pubkey',
+          },
+          {
+            name: 'timestamp',
+            type: 'u32',
+          },
+          {
+            name: 'mint_token',
+            type: 'pubkey',
+          },
+          {
+            name: 'options',
+            type: 'u64',
+          },
+          {
+            name: 'm2',
+            type: {
+              array: ['u8', 16],
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'ExerciseOptionsWrapperArgs',
+      type: {
+        kind: 'struct',
+        fields: [
+          {
+            name: 'options',
+            docs: ['The amount of options to exercise'],
+            type: 'u64',
           },
         ],
       },
