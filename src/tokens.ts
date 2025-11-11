@@ -1655,6 +1655,101 @@ export type Tokens = {
       ]
     },
     {
+      "name": "transferMarketCreator",
+      "discriminator": [
+        187,
+        198,
+        30,
+        8,
+        10,
+        169,
+        72,
+        239
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "superAdmin",
+          "docs": [
+            "Super admin of the program"
+          ],
+          "signer": true,
+          "address": "XEENqbVXt8y94cH7WMwYyQSuDgkvzZTzEzpsWLZu7Jf"
+        },
+        {
+          "name": "xeenonMarket",
+          "docs": [
+            "Market to change rewards share"
+          ],
+          "writable": true
+        },
+        {
+          "name": "xeenonMarketGroup"
+        }
+      ],
+      "args": [
+        {
+          "name": "newRewardsShare",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "transferRev",
+      "discriminator": [
+        85,
+        211,
+        126,
+        165,
+        239,
+        47,
+        137,
+        47
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "superAdmin",
+          "docs": [
+            "Super admin of the program"
+          ],
+          "signer": true,
+          "address": "XEENqbVXt8y94cH7WMwYyQSuDgkvzZTzEzpsWLZu7Jf"
+        },
+        {
+          "name": "xeenonMarket"
+        },
+        {
+          "name": "marketRevSrc",
+          "writable": true
+        },
+        {
+          "name": "revDst",
+          "writable": true
+        },
+        {
+          "name": "mintMain"
+        },
+        {
+          "name": "tokenProgram"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "withdrawToken",
       "discriminator": [
         136,
@@ -2657,6 +2752,10 @@ export type Tokens = {
           {
             "name": "creatorRewardsSharePercentage",
             "type": "u8"
+          },
+          {
+            "name": "isGhostCreator",
+            "type": "bool"
           }
         ]
       }
