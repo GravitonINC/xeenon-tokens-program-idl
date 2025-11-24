@@ -53,47 +53,6 @@ export type Tokens = {
       ]
     },
     {
-      "name": "accrueXeenonOptions",
-      "discriminator": [
-        179,
-        157,
-        83,
-        104,
-        167,
-        230,
-        255,
-        144
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "xeenOptionsAuthority",
-          "docs": [
-            "Super admin of the program"
-          ],
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "xeenonMarket",
-          "writable": true
-        },
-        {
-          "name": "xeenonMarketGroup"
-        }
-      ],
-      "args": [],
-      "returns": {
-        "defined": {
-          "name": "accrueXeenonOptionsEvent"
-        }
-      }
-    },
-    {
       "name": "borrow",
       "discriminator": [
         228,
@@ -436,75 +395,6 @@ export type Tokens = {
           "type": "u16"
         }
       ]
-    },
-    {
-      "name": "changeMarketGroupXeenAccrualRate",
-      "discriminator": [
-        239,
-        212,
-        43,
-        207,
-        246,
-        75,
-        61,
-        65
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "governance",
-          "signer": true
-        },
-        {
-          "name": "xeenonMarketGroup",
-          "writable": true
-        }
-      ],
-      "args": [
-        {
-          "name": "yearlyXeenAccrualBps",
-          "type": "u16"
-        }
-      ]
-    },
-    {
-      "name": "changeMarketGroupXeenAuth",
-      "discriminator": [
-        64,
-        24,
-        217,
-        78,
-        162,
-        21,
-        198,
-        51
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "governance",
-          "signer": true
-        },
-        {
-          "name": "xeenonMarketGroup",
-          "writable": true
-        },
-        {
-          "name": "xeenOptionsAuthority",
-          "docs": [
-            "Authority that can claim options earned by Xeen stakers"
-          ]
-        }
-      ],
-      "args": []
     },
     {
       "name": "claimCreatorRewards",
@@ -900,97 +790,6 @@ export type Tokens = {
       ]
     },
     {
-      "name": "exerciseOptions",
-      "discriminator": [
-        150,
-        29,
-        216,
-        162,
-        89,
-        0,
-        20,
-        229
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mayflowerMarketGroup"
-        },
-        {
-          "name": "mayflowerMarketMeta",
-          "writable": true
-        },
-        {
-          "name": "mintOptions",
-          "writable": true
-        },
-        {
-          "name": "optionsSrc",
-          "writable": true
-        },
-        {
-          "name": "mainSrc",
-          "writable": true
-        },
-        {
-          "name": "tokenDst",
-          "writable": true
-        },
-        {
-          "name": "liqVaultMain",
-          "writable": true
-        },
-        {
-          "name": "mayflowerTenant"
-        },
-        {
-          "name": "mintMain",
-          "writable": true
-        },
-        {
-          "name": "mintToken",
-          "writable": true
-        },
-        {
-          "name": "revEscrowGroup",
-          "writable": true
-        },
-        {
-          "name": "revEscrowTenant",
-          "writable": true
-        },
-        {
-          "name": "mayflowerMarket",
-          "writable": true
-        },
-        {
-          "name": "tokenProgramMain"
-        },
-        {
-          "name": "tokenProgram",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-        },
-        {
-          "name": "mayflowerProgram",
-          "address": "MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk"
-        }
-      ],
-      "args": [
-        {
-          "name": "args",
-          "type": {
-            "defined": {
-              "name": "exerciseOptionsWrapperArgs"
-            }
-          }
-        }
-      ]
-    },
-    {
       "name": "initMarketLinearConfig",
       "discriminator": [
         48,
@@ -1299,12 +1098,6 @@ export type Tokens = {
           ]
         },
         {
-          "name": "xeenOptionsAuthority",
-          "docs": [
-            "Authority that can claim options earned by Xeen stakers"
-          ]
-        },
-        {
           "name": "mayflowerProgram",
           "address": "MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk"
         },
@@ -1405,85 +1198,6 @@ export type Tokens = {
         }
       ],
       "args": []
-    },
-    {
-      "name": "mintXeenonOptions",
-      "discriminator": [
-        99,
-        129,
-        207,
-        186,
-        86,
-        39,
-        235,
-        70
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "docs": [
-            "Payer is the receiver of the options"
-          ],
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "xeenOptionsAuthority",
-          "docs": [
-            "Super admin of the program"
-          ],
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "xeenonMarket",
-          "writable": true
-        },
-        {
-          "name": "xeenonMarketGroup",
-          "writable": true
-        },
-        {
-          "name": "mayflowerMarketGroup"
-        },
-        {
-          "name": "mayflowerMarketMeta",
-          "writable": true
-        },
-        {
-          "name": "mintOptions",
-          "docs": [
-            "Mint used to create options"
-          ],
-          "writable": true
-        },
-        {
-          "name": "optionsDst",
-          "docs": [
-            "The token account to deposit the base token to"
-          ],
-          "writable": true
-        },
-        {
-          "name": "tokenProgram",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-        },
-        {
-          "name": "mayflowerProgram",
-          "address": "MMkP6WPG4ySTudigPQpKNpranEYBzYRDe8Ua7Dx89Rk"
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ],
-      "returns": {
-        "defined": {
-          "name": "mintXeenonOptionsEvent"
-        }
-      }
     },
     {
       "name": "repay",
@@ -2043,19 +1757,6 @@ export type Tokens = {
   ],
   "events": [
     {
-      "name": "accrueXeenonOptionsEvent",
-      "discriminator": [
-        151,
-        63,
-        59,
-        232,
-        19,
-        166,
-        4,
-        211
-      ]
-    },
-    {
       "name": "borrowEvent",
       "discriminator": [
         86,
@@ -2134,19 +1835,6 @@ export type Tokens = {
       ]
     },
     {
-      "name": "exerciseOptionsEvent",
-      "discriminator": [
-        130,
-        23,
-        206,
-        252,
-        23,
-        179,
-        39,
-        111
-      ]
-    },
-    {
       "name": "floorRaisedEvent",
       "discriminator": [
         180,
@@ -2186,19 +1874,6 @@ export type Tokens = {
       ]
     },
     {
-      "name": "mintXeenonOptionsEvent",
-      "discriminator": [
-        148,
-        191,
-        235,
-        245,
-        32,
-        126,
-        219,
-        228
-      ]
-    },
-    {
       "name": "repayEvent",
       "discriminator": [
         129,
@@ -2222,6 +1897,19 @@ export type Tokens = {
         26,
         67,
         248
+      ]
+    },
+    {
+      "name": "transferMarketCreatorEvent",
+      "discriminator": [
+        250,
+        202,
+        181,
+        67,
+        41,
+        214,
+        168,
+        234
       ]
     },
     {
@@ -2308,39 +1996,9 @@ export type Tokens = {
       "code": 6013,
       "name": "arithmeticOverflow",
       "msg": "Arithmetic overflow"
-    },
-    {
-      "code": 6014,
-      "name": "invalidAccountSize",
-      "msg": "Invalid account size"
-    },
-    {
-      "code": 6015,
-      "name": "invalidClaimableOptions",
-      "msg": "Invalid Claimable Options"
     }
   ],
   "types": [
-    {
-      "name": "accrueXeenonOptionsEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "xeenonMarket",
-            "type": "pubkey"
-          },
-          {
-            "name": "timestamp",
-            "type": "u32"
-          },
-          {
-            "name": "epochOptions",
-            "type": "u64"
-          }
-        ]
-      }
-    },
     {
       "name": "borrowEvent",
       "type": {
@@ -2429,15 +2087,6 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
-          },
-          {
-            "name": "xeenAccruedRewards",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
           }
         ]
       }
@@ -2577,15 +2226,6 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
-          },
-          {
-            "name": "xeenAccruedRewards",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
           }
         ]
       }
@@ -2615,54 +2255,6 @@ export type Tokens = {
               "Curvature of the dutch auction"
             ],
             "type": "f64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "exerciseOptionsEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "payer",
-            "type": "pubkey"
-          },
-          {
-            "name": "timestamp",
-            "type": "u32"
-          },
-          {
-            "name": "mintToken",
-            "type": "pubkey"
-          },
-          {
-            "name": "options",
-            "type": "u64"
-          },
-          {
-            "name": "b2",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "exerciseOptionsWrapperArgs",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "options",
-            "docs": [
-              "The amount of options to exercise"
-            ],
-            "type": "u64"
           }
         ]
       }
@@ -3100,15 +2692,6 @@ export type Tokens = {
             "type": "u64"
           },
           {
-            "name": "xeenAccruedRewards",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          },
-          {
             "name": "b2",
             "type": {
               "array": [
@@ -3178,30 +2761,6 @@ export type Tokens = {
               "The cumulative revenue for the tenant"
             ],
             "type": "u128"
-          }
-        ]
-      }
-    },
-    {
-      "name": "mintXeenonOptionsEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "amount",
-            "type": "u64"
-          },
-          {
-            "name": "xeenonMarket",
-            "type": "pubkey"
-          },
-          {
-            "name": "timestamp",
-            "type": "u32"
-          },
-          {
-            "name": "payer",
-            "type": "pubkey"
           }
         ]
       }
@@ -3384,6 +2943,30 @@ export type Tokens = {
       }
     },
     {
+      "name": "transferMarketCreatorEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "newCreator",
+            "type": "pubkey"
+          },
+          {
+            "name": "creatorRewardsSharePercentage",
+            "type": "u8"
+          },
+          {
+            "name": "xeenonMarket",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
       "name": "withdrawEvent",
       "type": {
         "kind": "struct",
@@ -3415,15 +2998,6 @@ export type Tokens = {
           {
             "name": "timestamp",
             "type": "u32"
-          },
-          {
-            "name": "xeenAccruedRewards",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
           }
         ]
       }
@@ -3537,22 +3111,6 @@ export type Tokens = {
                 1
               ]
             }
-          },
-          {
-            "name": "xeenAccruedRewards",
-            "docs": [
-              "Accumulated accrued rewards for Xeen stakers, they are updated by every deposit and withdrawal of the market"
-            ],
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          },
-          {
-            "name": "xeenClaimableOptions",
-            "type": "u64"
           }
         ]
       }
@@ -3585,20 +3143,6 @@ export type Tokens = {
                 1
               ]
             }
-          },
-          {
-            "name": "yearlyXeenAccrualBps",
-            "docs": [
-              "Annualized rate of accrual of Xeen by market as a percentage of the total staked amount"
-            ],
-            "type": "u16"
-          },
-          {
-            "name": "xeenOptionsAuthority",
-            "docs": [
-              "Authority that can claim options earned by Xeen stakers"
-            ],
-            "type": "pubkey"
           }
         ]
       }
